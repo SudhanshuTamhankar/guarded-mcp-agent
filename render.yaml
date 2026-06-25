@@ -8,7 +8,7 @@ services:
       - key: PORT
         value: 3001
       - key: DATABASE_URL
-        value: file:/data/prod.db
+        value: file:./prod.db
       - key: LLM_PROVIDER
         value: groq
       - key: GROQ_API_KEY
@@ -19,10 +19,6 @@ services:
         sync: false
       - key: SANDBOX_ROOT
         value: ../../sandbox
-    disk:
-      name: sqlite-data
-      mountPath: /data
-      sizeGB: 1
 
   - type: web
     name: guarded-mcp-web
