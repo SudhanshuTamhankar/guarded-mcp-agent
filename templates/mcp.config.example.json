@@ -1,0 +1,19 @@
+{
+  "servers": {
+    "exa": {
+      "transport": "streamable-http",
+      "url": "https://mcp.exa.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${EXA_API_KEY}"
+      }
+    },
+    "sandbox-files": {
+      "transport": "stdio",
+      "command": "node",
+      "args": ["mcp-servers/sandbox-files/dist/index.js"],
+      "env": {
+        "SANDBOX_ROOT": "./sandbox"
+      }
+    }
+  }
+}

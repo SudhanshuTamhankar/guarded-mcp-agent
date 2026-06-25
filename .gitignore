@@ -1,0 +1,40 @@
+# Dependencies
+node_modules
+dist
+build
+
+# Environment variables
+.env
+.env.local
+
+# IDE and Editor files
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Agent / AI artifacts
+.agents/
+.gemini/
+brain/
+.system_generated/
+Video/
+*.webm
+*.mp4
+*.mov
+*.mkv
+*.m4a
+
+# SQLite DB
+*.sqlite
+*.db
+*.db-journal
+prisma/*.db
+prisma/*.db-journal
+
+# Sandbox data (except the folder itself)
+sandbox/*
+!sandbox/.gitkeep

@@ -1,0 +1,15 @@
+{
+  "name": "guarded-mcp-agent",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "mcp-servers/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=api\" \"npm run dev --workspace=web\"",
+    "build": "npm run build --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

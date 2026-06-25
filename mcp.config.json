@@ -1,0 +1,25 @@
+{
+  "servers": {
+    "exa": {
+      "transport": "stdio",
+      "command": "npx.cmd",
+      "args": [
+        "-y",
+        "exa-mcp-server"
+      ],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      }
+    },
+    "sandbox-files": {
+      "transport": "stdio",
+      "command": "node",
+      "args": [
+        "mcp-servers/sandbox-files/dist/index.js"
+      ],
+      "env": {
+        "SANDBOX_ROOT": "./sandbox"
+      }
+    }
+  }
+}

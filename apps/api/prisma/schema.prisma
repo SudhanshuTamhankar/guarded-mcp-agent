@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model policy_rules {
+  id          String   @id @default(uuid())
+  type        String
+  name        String
+  enabled     Boolean  @default(true)
+  server_id   String
+  tool_name   String
+  config_json String
+  priority    Int
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model conversations {
+  id              String   @id @default(uuid())
+  status          String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  token_count     Int      @default(0)
+  tool_call_count Int      @default(0)
+  last_error      String?
+}
+
+model messages {
+  id              String   @id @default(uuid())
+  conversation_id String
+  role            String
+  content         String
+  metadata_json   String?
+  created_at      DateTime @default(now())
+}
+
+model tool_calls {
+  id                 String   @id @default(uuid())
+  conversation_id    String
+  server_id          String
+  original_tool_name String
+  exposed_tool_name  String
+  arguments_json     String
+  policy_decision    String?
+  policy_reason      String?
+  status             String
+  result_json        String?
+  error              String?
+  created_at         DateTime @default(now())
+  completed_at       DateTime?
+}
+
+model approval_requests {
+  id              String   @id @default(uuid())
+  conversation_id String
+  tool_call_id    String
+  status          String
+  reason          String
+  requested_at    DateTime @default(now())
+  expires_at      DateTime
+  resolved_at     DateTime?
+  resolved_by     String?
+}
+
+model audit_logs {
+  id              String   @id @default(uuid())
+  conversation_id String?
+  event_type      String
+  severity        String
+  message         String
+  metadata_json   String?
+  created_at      DateTime @default(now())
+}

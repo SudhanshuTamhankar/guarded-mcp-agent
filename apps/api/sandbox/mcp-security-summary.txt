@@ -1,0 +1,28 @@
+## Summary of Recent MCP Security Discussions (Top 3 Findings)
+
+1. **Security Audit of MCP (arXiv paper, 2025)**
+   - The Model Context Protocol (MCP) enables seamless integration of LLMs with external tools, but its current design introduces serious security risks.
+   - Demonstrated attacks include:
+     * Malicious code execution via tool calls.
+     * Remote access/control of the host system.
+     * Credential theft through tool misuse.
+   - Proposed mitigation: a safety‑auditing tool called **McpSafetyScanner** that automatically generates adversarial samples, searches for related vulnerabilities, and produces a security report.
+
+2. **"Poison everywhere: No output from your MCP server is safe" (Hacker News discussion)**
+   - Highlights the danger of MCP tools that can read local files, emphasizing the "lethal trifecta":
+     * Access to private data.
+     * Ability to execute malicious instructions.
+     * Capability to exfiltrate data.
+   - Recommendation: avoid installing disk‑reading tools or run MCP servers inside strict sandboxes (e.g., Firecracker micro‑VMs, Docker containers).
+   - Emphasizes principle of least privilege and careful threat modeling for any installed MCP tools.
+
+3. **"The ‘S’ in MCP Stands for Security" (Hacker News discussion)**
+   - Introduces the concept of **tool shadowing**, where an untrusted MCP server can override or manipulate the behavior of other trusted servers within the same agent context.
+   - MCP servers can dynamically change their toolsets, potentially turning malicious after deployment without user notice.
+   - Mitigations include:
+     * Pinning MCP server versions and monitoring for changes.
+     * Isolating untrusted and trusted tool calls into separate contexts.
+     * Implementing taint‑tracking to prevent untrusted output from triggering sensitive tools.
+
+**Overall Takeaway:**
+MCP dramatically expands LLM capabilities but also opens a wide attack surface. Key defenses involve sandboxing MCP servers, strict version control, context isolation, and proactive security auditing tools.
