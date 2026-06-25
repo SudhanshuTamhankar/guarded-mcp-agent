@@ -25,8 +25,12 @@ app.use('/api/logs', logsRouter);
 // Serve static frontend in production
 const frontendPath = path.join(__dirname, '../../web/dist');
 app.use(express.static(frontendPath));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(frontendPath, 'index.html'));
+app.use((req, res, next) => {
+  if (req.method === 'GET') {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+  } else {
+    next();
+  }
 });
 
 async function startServer() {
