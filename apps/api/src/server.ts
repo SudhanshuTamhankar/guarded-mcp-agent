@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 import { env } from './config/env';
 import { healthRouter } from './routes/health.routes';
@@ -20,6 +21,13 @@ app.use('/api/chat', chatRouter);
 app.use('/api/approvals', approvalsRouter);
 app.use('/api/policy', policyRouter);
 app.use('/api/logs', logsRouter);
+
+// Serve static frontend in production
+const frontendPath = path.join(__dirname, '../../web/dist');
+app.use(express.static(frontendPath));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
 async function startServer() {
   console.log('Initializing MCP Manager...');
