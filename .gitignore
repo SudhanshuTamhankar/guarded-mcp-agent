@@ -38,3 +38,5 @@ prisma/*.db-journal
 # Sandbox data (except the folder itself)
 sandbox/*
 !sandbox/.gitkeep
+!sandbox/*.txt
+!sandbox/*.md
